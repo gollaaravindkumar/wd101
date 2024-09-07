@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (validateDOB(dob)) {
             const user = { name, email, password, dob, terms };
-            saveUserData(user);
-            addUserToTable(user);
-            form.reset(); // Reset the form after submission
+            saveUserData(user);    // Save data to local storage
+            addUserToTable(user);  // Add the new user to the table immediately
+            form.reset();          // Reset the form after submission
         } else {
             alert("Date of birth must be for people between ages 18 and 55.");
         }
@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function saveUserData(user) {
         let users = JSON.parse(localStorage.getItem('users')) || [];
-        users.push(user);
-        localStorage.setItem('users', JSON.stringify(users));
+        users.push(user);  // Append new user to the existing array
+        localStorage.setItem('users', JSON.stringify(users));  // Save the updated array back to localStorage
     }
 
     function loadUserData() {
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         row.innerHTML = `
             <td>${user.name}</td>
             <td>${user.email}</td>
-            <td>${user.password}</td>
+            <td>********</td> <!-- Masked password -->
             <td>${user.dob}</td>
             <td>${user.terms ? 'Yes' : 'No'}</td>
         `;
